@@ -1,0 +1,36 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int left=0,o=0,formed=0,unique=0,minLen=INT_MAX,start=0;
+        vector<int>freq(256,0);
+        vector<int>freq1(256,0);
+        string k="";
+        for(int i=0;i<t.length();i++){
+            if(freq[t[i]]==0){
+                unique++;
+            }
+            freq[t[i]]++;
+        }
+        for(int right=0;right<s.length();right++){
+            freq1[s[right]]++;
+            if(freq[s[right]]>0 && freq1[s[right]]==freq[s[right]]){
+                formed++;
+            }
+            while(formed==unique){
+                
+                if (right-left+1 < minLen) {
+                    minLen=right-left+1;
+                    start=left;
+                }
+                freq1[s[left]]--;
+                if(freq[s[left]]>0 && freq1[s[left]]<freq[s[left]]){
+                    formed--;
+                }
+                left++;
+                
+            }
+            
+        }
+        return minLen==INT_MAX?"":s.substr(start,minLen);
+    }
+};
