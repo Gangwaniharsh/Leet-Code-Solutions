@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int low=0,high=nums.size()-1,mid;
+        while(low<=high){
+            mid=(low+(high-low)/2);
+        if(nums.size()!=1){
+             int left = (mid > 0) ? nums[mid - 1] : INT_MIN;
+         int right = (mid < nums.size() - 1) ? nums[mid + 1] : INT_MIN;
+             if(nums[mid]>right && nums[mid]>left){
+                return mid;
+            }
+            else if(nums[mid]<right){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        else{
+            return low;
+        }
+           
+            
+      }
+        return 0;
+    }
+};
