@@ -1,0 +1,32 @@
+long long power(long long base,long long exp,long long limit){
+    long long result=1;
+    
+    while(exp>0){
+        result*=base;
+        if(result>limit){
+            return result;
+        }
+        exp--;
+    }
+    return result;
+}
+
+int nthRoot(int n, int m) {
+    // write code here...
+    long long low=0,high=m;
+    while(low<=high){
+        long long mid=(low + (high-low)/2);
+        
+        long long value=power(mid,n,m);
+        if(value == m){
+            return mid;
+        }
+        else if(value>m){
+            high=mid-1;
+        }
+        else{
+            low=mid+1;
+        }
+    }
+    return -1;
+}
