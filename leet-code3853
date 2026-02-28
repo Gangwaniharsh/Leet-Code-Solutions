@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string mergeCharacters(string s, int k) {
+        vector<char>arr(s.begin(),s.end());
+        while(true)
+            {
+                bool merged = false;
+
+                for(int i = 0;i<arr.size();i++)
+                    {
+                        for(int j = i+1;j<arr.size() && j - i<=k;j++)
+                            {
+                                if(arr[i] == arr[j])
+                                {
+                                    arr.erase(arr.begin()+j);
+                                    merged = true;
+                                    break;
+                                }
+                            }
+                        if(merged) break;
+                        
+                    }
+                if(!merged) break;
+            }
+        return string(arr.begin(),arr.end());
+    }
+};
