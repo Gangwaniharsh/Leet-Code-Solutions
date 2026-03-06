@@ -1,0 +1,34 @@
+class Solution {
+  public:
+    bool feasible(vector<int>arr,int distance,int cows){
+        int countcows=1,last=arr[0];
+        for(int j=1;j<arr.size();j++){
+            if(arr[j]-last>=distance){
+                countcows++;
+                last=arr[j];
+            }
+        }
+        if(countcows>=cows){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    int aggressiveCows(vector<int> &stalls, int k) {
+        // code here
+       sort(stalls.begin(),stalls.end());
+       int low=0,high=stalls[stalls.size()-1] - stalls[0];
+       while(low<=high){
+           int mid=low + (high-low)/2;
+           if(feasible(stalls,mid,k)==true){
+               low=mid+1;
+           }
+           else{
+               high=mid-1;
+           }
+       }
+       return high;
+        
+    }
+};
